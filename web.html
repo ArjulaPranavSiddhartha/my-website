@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pranav Siddartha - Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #2d2e32;
+            --secondary: #64f4ac;
+            --dark: #191919;
+            --light: #ffffff;
+            --gray: #697477;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.7;
+        }
+
+        /* Header Styles */
+        header {
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, #191919 0%, #2d2e32 100%);
+        }
+
+        .geometric-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background: 
+                linear-gradient(45deg, transparent 45%, var(--secondary) 45%, var(--secondary) 55%, transparent 55%),
+                linear-gradient(-45deg, transparent 45%, var(--secondary) 45%, var(--secondary) 55%, transparent 55%);
+            background-size: 30px 30px;
+            animation: backgroundMove 20s linear infinite;
+        }
+
+        @keyframes backgroundMove {
+            from {background-position: 0 0;}
+            to {background-position: 60px 60px;}
+        }
+
+        .profile-intro {
+            max-width: 1200px;
+            margin: 4rem auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-intro h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-intro h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--secondary);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: underlineAnimate 1s forwards 0.5s;
+        }
+
+        @keyframes underlineAnimate {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        .contact-info {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin: 2rem 0;
+        }
+
+        .profile-intro p {
+            max-width: 700px;
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            color: var(--gray);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--secondary);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s;
+        }
+
+        nav a:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            position: relative;
+        }
+
+        /* Projects */
+        .project {
+            background: var(--primary);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            transform: translateX(-50px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--secondary);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.3s;
+        }
+
+        .project:hover::before {
+            transform: scaleY(1);
+        }
+
+        .project h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-item {
+            background: var(--primary);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-item:hover::before {
+            opacity: 0.1;
+        }
+
+        /* Education */
+        .education {
+            background: var(--primary);
+            padding: 2rem;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .education h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-intro h1 {
+                font-size: 3rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="geometric-bg"></div>
+        <div class="profile-intro">
+            <h1>Pranav Siddartha</h1>
+            <div class="contact-info">
+                Hyderabad, India • +91 77023 47972 • pranavsiddartha602@gmail.com
+            </div>
+            <p>Recent Computer Science graduate with strong skills in Python, SQL, and data analysis. Experienced in building machine learning models and using tools like Pandas, NumPy, and Scikit-learn. Skilled in data visualization with Matplotlib, Seaborn, Tableau, and Power BI.</p>
+            <nav>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#education">Education</a>
+                <a href="#certifications">Certifications</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project">
+                <h3>Predicting Prices of houses in California</h3>
+                <p>Built a machine learning model using a dataset from Kaggle, applying various regression techniques on the available data. The main objective of this project is to predict house prices in California. Factors such as ocean proximity, longitude, and other relevant features were considered in order to generate accurate price predictions.</p>
+            </div>
+            <div class="project">
+                <h3>Breast Cancer Tumor Classification Using ML</h3>
+                <p>The aim of this project is to build a machine learning model for breast cancer prediction. Using a dataset from Kaggle, I developed the model by applying various regression techniques. The dataset contains information about different features that help predict the risk of breast cancer. This analysis explores recent advancements in breast cancer tumor classification using machine learning algorithms.</p>
+            </div>
+            <div class="project">
+                <h3>Exploratory Data Analysis on old used Cars</h3>
+                <p>The aim of this project is to perform data analysis on a dataset of old and used cars. Using a dataset sourced from Kaggle, I conducted a detailed analysis to uncover patterns and insights. The objective is to predict the types of cars people prefer, including their mileage and the models that are most favored.</p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">Python</div>
+                <div class="skill-item">SQL</div>
+                <div class="skill-item">Pandas</div>
+                <div class="skill-item">NumPy</div>
+                <div class="skill-item">MatplotLib</div>
+                <div class="skill-item">Seaborn</div>
+                <div class="skill-item">Tableau</div>
+                <div class="skill-item">PowerBI</div>
+                <div class="skill-item">Scikit-learn</div>
+                <div class="skill-item">TensorFlow</div>
+                <div class="skill-item">PyTorch</div>
+                <div class="skill-item">Generative AI</div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="education">
+                <h3>Bachelor of Technology in Computer Science Technology</h3>
+                <p>Sasi Institute of Technology | 2024</p>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <div class="certifications-grid">
+                
+            </div>
+        </section>
+    </main>
+
+    <style>
+        /* Certifications Section Styles */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .certification-item {
+            background: var(--primary);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certification-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--secondary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .certification-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .certification-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .cert-icon {
+            font-size: 2.5rem;
+            background: rgba(100, 244, 172, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .cert-content h3 {
+            font-size: 1.2rem;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-date {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (entry.target.classList.contains('project')) {
+                        entry.target.style.transitionDelay = '0.2s';
+                    }
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        // Observe all sections and projects
+        document.querySelectorAll('section, .project').forEach((element) => {
+            observer.observe(element);
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = document.querySelector(this.getAttribute('href'));
+                section.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
